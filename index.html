@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Zafran Studio</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(145deg, #0b1a22 0%, #1c3a44 100%);
+  padding: 28px 20px;
+  color: #f0f9ff;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #FFFFFF, #B8E1FC);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+/* card styling */
+.card {
+  background: rgba(255, 255, 255, 0.97);
+  color: #1e2f3a;
+  border-radius: 28px;
+  padding: 1.6rem 1.8rem;
+  margin-bottom: 28px;
+  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(0px);
+  transition: transform 0.2s ease, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 40px -14px rgba(0, 0, 0, 0.4);
+}
+
+.card h2 {
+  margin-bottom: 1.25rem;
+  color: #0f4c5f;
+  border-left: 5px solid #00b4cc;
+  padding-left: 18px;
+  font-weight: 700;
+  font-size: 1.7rem;
+  letter-spacing: -0.3px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 2.2fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e2edf2;
+  align-items: center;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.row div {
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 18px;
+  border: 1px solid #cbdbe2;
+  background: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #0a2e3b;
+  transition: all 0.2s;
+  box-shadow: inset 0 1px 2px #00000008, 0 1px 2px white;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2c9fbb;
+  box-shadow: 0 0 0 3px rgba(0, 180, 204, 0.2);
+}
+
+.note {
+  font-size: 0.8rem;
+  color: #4a6f7c;
+  background: #eff7fa;
+  padding: 6px 12px;
+  border-radius: 40px;
+  display: inline-block;
+  width: fit-content;
+  line-height: 1.3;
+}
+
+/* equipment & interior sections */
+.equipment-section, .interior-section {
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 28px;
+  padding: 1.6rem 1.8rem;
+  margin-bottom: 28px;
+  color: #1e2f3a;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+}
+
+.equipment-section h3, .interior-section h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #145c6e;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 2px dashed #bdd9e2;
+  padding-bottom: 8px;
+}
+
+.badge-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.badge-item {
+  background: #eef3f7;
+  padding: 8px 18px;
+  border-radius: 60px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #115e72;
+  box-shadow: inset 0 0 0 1px #cde3ea, 0 1px 2px rgba(0,0,0,0.05);
+  transition: all 0.1s;
+}
+
+.badge-item::before {
+  content: "⚡";
+  margin-right: 8px;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.interior-section .badge-item::before {
+  content: "✨";
+}
+
+.grand {
+  background: linear-gradient(115deg, #0f4c5f, #0f6b7c);
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 800;
+  padding: 20px 28px;
+  border-radius: 60px;
+  text-align: center;
+  margin: 32px 0 20px;
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
+  letter-spacing: 1px;
+}
+
+#total {
+  font-size: 2.2rem;
+  background: rgba(255,255,240,0.2);
+  padding: 5px 18px;
+  border-radius: 60px;
+  margin-left: 12px;
+  display: inline-block;
+}
+
+/* additional micro-interactions */
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+  opacity: 0.5;
+}
+
+hr {
+  margin: 10px 0;
+  border-color: #bddae3;
+}
+
+/* responsive */
+@media (max-width: 800px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 16px 0;
+  }
+  .note {
+    width: 100%;
+    text-align: left;
+  }
+  .card h2 {
+    font-size: 1.4rem;
+  }
+  .grand {
+    font-size: 1.3rem;
+    padding: 16px;
+  }
+  #total {
+    font-size: 1.7rem;
+    display: block;
+    margin-top: 8px;
+  }
+  .badge-list {
+    gap: 8px;
+  }
+  .badge-item {
+    font-size: 0.75rem;
+    padding: 5px 12px;
+  }
+}
+
+/* subtle glow */
+.container {
+  animation: fadeSlide 0.5s ease-out;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* hint for total */
+.total-hint {
+  text-align: center;
+  font-size: 0.85rem;
+  margin-top: -15px;
+  margin-bottom: 15px;
+  opacity: 0.8;
+  font-weight: 500;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="title">Zafran Studio</div>
+
+  <!-- Office Rent & Utilities -->
+  <div class="card">
+    <h2>🏢 Office Rent & Utilities</h2>
+    <div class="row">
+      <div>Office Rent</div>
+      <div><input type="number" value="200000" class="amount" step="1000" id="rentOffice"></div>
+      <div class="note"></div>
+    </div>
+    <div class="row">
+      <div>Service Charge</div>
+      <div><input type="number" value="10000" class="amount" step="500"></div>
+      <div class="note"></div>
+    </div>
+    <div class="row">
+      <div>Bills (Elec / Gas / Water / Internet)</div>
+      <div><input type="number" value="10000" class="amount" step="1000"></div>
+      <div class="note"></div>
+    </div>
+  </div>
+
+  <!-- Staff Salary Section -->
+  <div class="card">
+    <h2>👥 Creative Team · Staff Salary</h2>
+    <div class="row">
+      <div>📸 Photo & Videographer (1)</div>
+      <div><input type="number" value="30000" class="amount" step="1000"></div>
+      <div class="note">১৫০-২০০ টি ছবি বা ভিডিও তোলা সম্ভব</div>
+    </div>
+    <div class="row">
+      <div>✂️ Video Editor (1)</div>
+      <div><input type="number" value="30000" class="amount" step="1000"></div>
+      <div class="note">১০০-১৫০ টি ভিডিও এডিট করা সম্ভব (4K)</div>
+    </div>
+    <div class="row">
+      <div>💻 Website Full Stack Developer (1)</div>
+      <div><input type="number" value="40000" class="amount" step="1000"></div>
+      <div class="note">৫০-১০০ টি ওয়েবসাইট তৈরি</div>
+    </div>
+    <div class="row">
+      <div>🎨 Graphic Designer (1)</div>
+      <div><input type="number" value="20000" class="amount" step="1000"></div>
+      <div class="note">Image Resize, Background change, Compression, Logo, Banner, Thumbnail</div>
+    </div>
+    <div class="row">
+      <div>📈 Digital Marketer (1)</div>
+      <div><input type="number" value="20000" class="amount" step="1000"></div>
+      <div class="note">৫০-১০০ জন সার্ভিস (SEO, Ads, Social)</div>
+    </div>
+    <div class="row">
+      <div>🎧 Customer Care (1)</div>
+      <div><input type="number" value="20000" class="amount" step="1000"></div>
+      <div class="note">Client support & CRM</div>
+    </div>
+  </div>
+
+  <!-- Marketing Cost -->
+  <div class="card">
+    <h2>📢 Marketing & Growth</h2>
+    <div class="row">
+      <div>🚀 Monthly Marketing Budget</div>
+      <div><input type="number" value="40000" class="amount" step="2000" id="marketingBudget"></div>
+      <div class="note">৩০,০০০ - ৫০,০০০  (Google Ads, FB, influencer collab)</div>
+    </div>
+  </div>
+
+  <!-- IMPORTANT DEVICES section - structured & interactive (static showcase) -->
+  <div class="equipment-section">
+    <h3>📷 Core Production Gear · Essential Devices</h3>
+    <div class="badge-list">
+      <span class="badge-item">Camera (Body)</span>
+      <span class="badge-item">Lens</span>
+      <span class="badge-item">Microphone</span>
+      <span class="badge-item">Tripod</span>
+      <span class="badge-item">Gimbal</span>
+      <span class="badge-item">Teleprompter</span>
+      <span class="badge-item">Light Panel / Softbox</span>
+      <span class="badge-item">Acoustic Panel Set</span>
+      <span class="badge-item">External SSD (1TB/2TB)</span>
+      <span class="badge-item">Laptop / Desktop</span>
+    </div>
+  </div>
+
+  <!-- interior design / furniture props -->
+  <div class="interior-section">
+    <h3>🪑 Interior Design · Furniture & Props</h3>
+    <!-- <div class="badge-list">
+      <span class="badge-item">Ergonomic Workstations</span>
+      <span class="badge-item">Green Screen Backdrop</span>
+      <span class="badge-item">Client Lounge Sofa</span>
+      <span class="badge-item">Modern Props (chairs, decor)</span>
+      <span class="badge-item">Acoustic Foam Panels</span>
+      <span class="badge-item">Studio Lighting Grid</span>
+      <span class="badge-item">Backdrop Stand & Canvas</span>
+      <span class="badge-item">Storage Racks / Shelves</span>
+    </div> -->
+    <!-- <div class="note" style="margin-top: 18px; background: #fff0db;">✨ One-time setup cost, elevate brand aesthetics & client experience</div> -->
+  </div>
+
+  <!-- GRAND TOTAL MONTHLY COST -->
+  <!-- <div class="grand">
+    💰 Total Monthly Operational Cost: ৳ <span id="total">0</span>
+  </div>
+  <div class="total-hint">⚡ Adjust any field above — budget updates in real time | All values in BDT (Taka)</div>
+</div> -->
+
+<script>
+  // Calculate total from all .amount input fields and update display with local formatting.
+  function calculateTotalMonthly() {
+    let totalExpenses = 0;
+    const allAmountFields = document.querySelectorAll('.amount');
+    
+    for (let field of allAmountFields) {
+      let rawValue = field.value.trim();
+      // if empty or non-number, treat as 0
+      let numberValue = parseFloat(rawValue);
+      if (isNaN(numberValue)) {
+        numberValue = 0;
+      }
+      totalExpenses += numberValue;
+    }
+    
+    // Format with commas for thousands separators (Bangladesh/International style)
+    const formattedTotal = totalExpenses.toLocaleString('en-IN'); // en-IN uses comma separators similar to BDT style
+    document.getElementById('total').innerText = formattedTotal;
+  }
+  
+  // attach event listeners to all existing .amount inputs
+  function bindEvents() {
+    const inputs = document.querySelectorAll('.amount');
+    for (let input of inputs) {
+      input.addEventListener('input', function(e) {
+        // sanitize: if negative or empty, set to 0 gracefully
+        let val = parseFloat(this.value);
+        if (isNaN(val)) {
+          this.value = 0;
+        } else if (val < 0) {
+          this.value = 0;
+        }
+        calculateTotalMonthly();
+      });
+      // also trigger on blur to ensure proper formatting if needed
+      input.addEventListener('blur', function() {
+        let val = parseFloat(this.value);
+        if (isNaN(val)) {
+          this.value = 0;
+        } else if (val < 0) {
+          this.value = 0;
+        }
+        calculateTotalMonthly();
+      });
+    }
+  }
+  
+  // initial calculation and binding
+  calculateTotalMonthly();
+  bindEvents();
+  
+  // Additional dynamic: if any new .amount gets added later (not needed but robust)
+  // but we also support all existing fields from DOM already.
+  // also optional: preserve any user modification but ensure default values are present
+  // Handle Edge: when user deletes content, restore zero behavior
+  document.querySelectorAll('.amount').forEach(field => {
+    if (field.value === "") {
+      field.value = 0;
+    }
+  });
+  
+  // additional manual sync: if any unexpected error
+  window.addEventListener('load', function() {
+    calculateTotalMonthly();
+    // Re-check all numeric fields to avoid empty strings after load
+    document.querySelectorAll('.amount').forEach(f => {
+      if (f.value === "") f.value = 0;
+      let num = parseFloat(f.value);
+      if (isNaN(num)) f.value = 0;
+    });
+    calculateTotalMonthly();
+  });
+</script>
+
+<!-- ensure all initial values are numeric and non-empty -->
+</body>
+</html>
