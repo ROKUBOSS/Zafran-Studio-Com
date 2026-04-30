@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Model Portfolio</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 15px;
+    background: #f5f5f5;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Grid Layout */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+/* Card */
+.card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Name */
+.name {
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    background: #fafafa;
+}
+
+/* Image Wrapper */
+.image-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    padding: 5px;
+}
+
+/* First image full width */
+.image-group img:first-child {
+    grid-column: span 2;
+    height: 180px;
+}
+
+/* Images */
+.image-group img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 600px) {
+    .image-group img:first-child {
+        height: 150px;
+    }
+
+    .image-group img {
+        height: 90px;
+    }
+}
+
+/* Print */
+@media print {
+    .container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>Model Portfolio</h2>
+
+<div class="container">
+
+    <div class="card">
+        <div class="name">Maftuha Jannat Jim</div>
+        <div class="image-group">
+            <img src="models/Maftuha Jannat Jim.jpeg">
+            <img src="models/marufajim1.jpeg">
+            <img src="models/marufajim2.jpeg">
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="name">Maftuha Jannat Jim</div>
+        <div class="image-group">
+            <img src="models/Maftuha Jannat Jim.jpeg">
+            <img src="models/marufajim1.jpeg">
+            <img src="models/marufajim2.jpeg">
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="name">Maftuha Jannat Jim</div>
+        <div class="image-group">
+            <img src="models/Maftuha Jannat Jim.jpeg">
+            <img src="models/marufajim1.jpeg">
+            <img src="models/marufajim2.jpeg">
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
