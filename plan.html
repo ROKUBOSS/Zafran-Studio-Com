@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:'Poppins',sans-serif;
+    }
+
+    body{
+        background: linear-gradient(135deg,#667eea,#764ba2);
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:#333;
+    }
+
+    .container{
+        background:#fff;
+        width:95%;
+        max-width:500px;
+        padding:25px;
+        border-radius:15px;
+        box-shadow:0 10px 30px rgba(0,0,0,0.2);
+        animation:fadeIn 0.6s ease;
+    }
+
+    h2{
+        text-align:center;
+        margin-bottom:15px;
+        color:#444;
+    }
+
+    .task{
+        display:flex;
+        align-items:center;
+        padding:10px;
+        margin:8px 0;
+        border-radius:10px;
+        transition:0.3s;
+        cursor:pointer;
+    }
+
+    .task:hover{
+        background:#f0f3ff;
+    }
+
+    .task input{
+        margin-right:12px;
+        transform:scale(1.3);
+        cursor:pointer;
+    }
+
+    .task.completed{
+        text-decoration:line-through;
+        color:#999;
+        background:#e6e6e6;
+    }
+
+    .note{
+        background:#f9f9f9;
+        padding:10px;
+        border-radius:8px;
+        margin-top:15px;
+        font-size:14px;
+    }
+
+    .section{
+        margin-top:15px;
+    }
+
+    .section h4{
+        margin-bottom:8px;
+        color:#555;
+    }
+
+    ul{
+        padding-left:20px;
+    }
+
+    ul li{
+        margin:5px 0;
+    }
+
+    @keyframes fadeIn{
+        from{opacity:0; transform:translateY(20px);} 
+        to{opacity:1; transform:translateY(0);} 
+    }
+
+    @media(max-width:480px){
+        .container{
+            padding:18px;
+        }
+
+        h2{
+            font-size:18px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>📋 My Plan</h2>
+
+    <div class="task"><input type="checkbox">Normal Model (Low Budget)</div>
+    <div class="task"><input type="checkbox">Celebrity Model / Influencer</div>
+    <div class="task"><input type="checkbox">Review Video</div>
+    <div class="task"><input type="checkbox">64 Districts Video Shoots</div>
+    <div class="task"><input type="checkbox">Wholesale Business</div>
+    <div class="task"><input type="checkbox">Podcast</div>
+    <div class="task"><input type="checkbox">Education System</div>
+    <div class="task"><input type="checkbox"><b>Donation</b></div>
+
+    <div class="note">
+        <b>Note:</b> Script / Sample Video / Instruction / Props / Background /  Money Receipt
+    </div>
+
+    <div class="section">
+        <h4>Need For This</h4>
+        <ul>
+            <li>News Presentation Class</li>
+            <li>Grooming Class</li>
+            <li>Promotional Video Making Class</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    const tasks = document.querySelectorAll('.task');
+
+    tasks.forEach(task => {
+        const checkbox = task.querySelector('input');
+
+        checkbox.addEventListener('change', () => {
+            task.classList.toggle('completed');
+        });
+    });
+</script>
+
+</body>
+</html>
